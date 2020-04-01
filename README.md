@@ -44,9 +44,17 @@ The error will be in the `error` property of the object.
  ```
 It also provides som other handy methods -
  ```ruby
- report.success?
- report.failed?
- report.error_message
+ report.success? # true or false
+ report.failed? # true or false
+ report.error_message # only error message
+ report.error_class # only error class
+ ```
+Also someone might want to log the error or use some exception tracking service for the errors that occured. To do
+ this just have override a instance method `error_logger`
+ ```ruby
+def error_logger
+   Rollbar.error(@error)
+end
  ```
 If you want something other than `perform` then you do the following -
 ```ruby
